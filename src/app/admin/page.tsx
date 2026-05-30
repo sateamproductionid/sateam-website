@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Eye, Users, Timer, ArrowDownRight, AlertTriangle } from "lucide-react";
+import { Eye, Users, Timer, ArrowDownRight, Info } from "lucide-react";
 
 type Stats = {
   configured: boolean;
@@ -60,20 +60,22 @@ export default function AdminDashboardPage() {
         </p>
       </header>
 
-      {/* Demo data banner */}
+      {/* Preview mode banner */}
       {stats && !stats.configured ? (
-        <div className="flex items-start gap-3 bg-amber-500/10 border border-amber-500/30 text-amber-200 rounded-xl p-4 mb-8">
-          <AlertTriangle size={18} className="mt-0.5 shrink-0" />
+        <div className="flex items-start gap-3 bg-violet-500/10 border border-violet-500/30 text-violet-200 rounded-xl p-4 mb-8">
+          <Info size={18} className="mt-0.5 shrink-0" />
           <div className="text-sm leading-relaxed">
-            <strong className="font-semibold">Showing demo data.</strong> Set{" "}
-            <code className="text-xs bg-amber-500/10 px-1.5 py-0.5 rounded">
-              VERCEL_API_TOKEN
-            </code>{" "}
-            and{" "}
-            <code className="text-xs bg-amber-500/10 px-1.5 py-0.5 rounded">
-              VERCEL_PROJECT_ID
-            </code>{" "}
-            in your Vercel environment to wire real analytics.
+            <strong className="font-semibold">Preview mode.</strong> Real
+            visitor data is collected by Vercel Analytics — view it directly at{" "}
+            <a
+              href="https://vercel.com/sateam-creatives-projects/sateam-website/analytics"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-white transition-colors"
+            >
+              vercel.com/analytics
+            </a>
+            .
           </div>
         </div>
       ) : null}
