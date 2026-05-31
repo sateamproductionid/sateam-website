@@ -1,9 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "motion/react";
 import { studioCopy } from "@/lib/data";
+import { Typewriter } from "@/components/Typewriter";
 
 export function BrandStatement() {
+  const [titleDone, setTitleDone] = useState(false);
+
   return (
     <section className="bg-neutral-900 text-white py-32 md:py-40">
       <div className="container mx-auto px-6 md:px-12">
@@ -11,18 +15,33 @@ export function BrandStatement() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.5 }}
           className="max-w-5xl"
         >
-          <p className="text-xs md:text-sm uppercase tracking-[0.3em] text-violet-500 mb-8">
+          {/* Eyebrow — fade in immediately */}
+          <p className="text-xs md:text-sm uppercase tracking-[0.3em] text-violet-500 mb-8 font-mono">
             {studioCopy.hero.eyebrow}
           </p>
-          <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.95] whitespace-pre-line">
-            {studioCopy.hero.title}
+
+          {/* Title — typewriter */}
+          <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.95] whitespace-pre-line min-h-[1.9em]">
+            <Typewriter
+              text={studioCopy.hero.title}
+              speed={55}
+              delay={300}
+              onDone={() => setTitleDone(true)}
+            />
           </h2>
-          <p className="mt-10 max-w-2xl text-lg md:text-xl text-neutral-400 leading-relaxed">
+
+          {/* Description — fades in after typewriter completes */}
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={titleDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-10 max-w-2xl text-lg md:text-xl text-neutral-400 leading-relaxed"
+          >
             {studioCopy.hero.desc}
-          </p>
+          </motion.p>
         </motion.div>
       </div>
     </section>

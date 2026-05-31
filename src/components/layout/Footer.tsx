@@ -17,9 +17,10 @@ export function Footer() {
             </h2>
             <a
               href={`mailto:${studio.email}`}
-              className="inline-flex items-center gap-2 text-xl font-medium border-b border-white pb-1 hover:text-neutral-400 hover:border-neutral-400 transition-all"
+              className="inline-flex items-center gap-2 text-base sm:text-lg md:text-xl font-medium border-b border-white pb-1 hover:text-neutral-400 hover:border-neutral-400 transition-all break-all"
             >
-              {studio.email} <ArrowUpRight size={20} />
+              {studio.email}{" "}
+              <ArrowUpRight size={18} className="shrink-0" />
             </a>
           </div>
           <div className="flex flex-col md:items-end justify-end gap-8">

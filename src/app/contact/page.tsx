@@ -131,7 +131,7 @@ export default function ContactPage() {
                 Email
               </span>
             </div>
-            <p className="text-2xl font-bold tracking-tight flex items-center gap-2 break-all">
+            <p className="text-lg sm:text-xl md:text-2xl font-bold tracking-tight flex items-center gap-2 break-all">
               {studio.email}
               <ArrowUpRight
                 size={20}
