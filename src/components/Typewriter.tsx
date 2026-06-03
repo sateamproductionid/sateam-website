@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useInView } from "motion/react";
 
 type TypewriterProps = {
   text: string;
+  /** Start typing only when this becomes true (default: true). */
+  start?: boolean;
   /** ms between each character */
   speed?: number;
-  /** ms to wait after entering view before starting */
+  /** ms to wait after `start` becomes true before typing */
   delay?: number;
   /** show cursor blinking after text finishes typing */
   cursorAfter?: boolean;
@@ -18,24 +19,23 @@ type TypewriterProps = {
 
 export function Typewriter({
   text,
+  start = true,
   speed = 45,
   delay = 0,
   cursorAfter = false,
   onDone,
   className = "",
 }: TypewriterProps) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
   const [count, setCount] = useState(0);
   const [started, setStarted] = useState(false);
   const doneRef = useRef(false);
 
-  // Start (with optional delay) once in view
+  // Start (with optional delay) once parent gives the go-ahead
   useEffect(() => {
-    if (!inView || started) return;
+    if (!start || started) return;
     const t = setTimeout(() => setStarted(true), delay);
     return () => clearTimeout(t);
-  }, [inView, delay, started]);
+  }, [start, delay, started]);
 
   // Tick one character at a time
   useEffect(() => {
@@ -58,7 +58,7 @@ export function Typewriter({
   const lines = visible.split("\n");
 
   return (
-    <span ref={ref} className={className}>
+    <span className={className}>
       {lines.map((line, i) => (
         <span key={i}>
           {line}

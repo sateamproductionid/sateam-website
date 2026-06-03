@@ -6,6 +6,7 @@ import { studioCopy } from "@/lib/data";
 import { Typewriter } from "@/components/Typewriter";
 
 export function BrandStatement() {
+  const [inView, setInView] = useState(false);
   const [titleDone, setTitleDone] = useState(false);
 
   return (
@@ -14,21 +15,23 @@ export function BrandStatement() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, amount: 0.2 }}
+          onViewportEnter={() => setInView(true)}
           transition={{ duration: 0.5 }}
           className="max-w-5xl"
         >
-          {/* Eyebrow — fade in immediately */}
+          {/* Eyebrow */}
           <p className="text-xs md:text-sm uppercase tracking-[0.3em] text-violet-500 mb-8 font-mono">
             {studioCopy.hero.eyebrow}
           </p>
 
           {/* Title — typewriter */}
-          <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.95] whitespace-pre-line min-h-[1.9em]">
+          <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.95] whitespace-pre-line min-h-[2em]">
             <Typewriter
               text={studioCopy.hero.title}
+              start={inView}
               speed={55}
-              delay={300}
+              delay={250}
               onDone={() => setTitleDone(true)}
             />
           </h2>
